@@ -1,0 +1,714 @@
+\documentclass[a4paper,12pt,titlepage]{ctexart}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage{verbatim}
+\usepackage{array}
+%\author{上海市上海中学\\金佳熠}
+\title{\begin{LARGE} \textbf{带湿度修正的激光散射PM2.5检测仪} \end{LARGE}\\[2ex]}
+
+\begin{document}
+\date{2019年1月}       
+\maketitle
+\thispagestyle{plain}
+\setcounter{page}{1}
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+
+
+\pagestyle{empty}
+\textbf{摘要}：
+随着我国经济的快速发展与工业化、城镇化进程加快，空气污染成为了难以避免的严重问题.~近年来，我国空气质量改善放缓，大气污染物的排放总量常年居高.~虽然有关部门一直在采取措施控制空气污染，但以PM2.5为首的污染物的总体浓度依然居高不下，对人的身体健康产生严重的影响.~\par
+为此，许多家庭会在家配备不少的空气净化器，来减少室内的PM2.5浓度，以便获得一种健康的生活与居住环境.~近年来，随着产品的创新与升级，智能净化器开始广泛的出现并被大家所使用，它能够根据室内实际的空气质量情况选择启动与关闭，并且根据空气质量的状况和使用频率、时长，来提示更换过滤网.~这种智能净化器能够自主的进行空气净化，方便了人们的生活.~\par
+然而，现在的绝大部分的智能空气净化器配备的PM2.5检测仪都是激光散射检测仪.~这种检测仪有一个最大的问题就是，由于水蒸气也会反射光，当空气湿度超过60\%时，会产生较大误差，读数会严重偏大.~下雨天或者在我国南方地区，由于空气湿度较大，仪器无法准确读数.~对于智能空气净化器而言，由于配备的检测仪具有这种由湿度引起的误差，会随着湿度的增大而读数偏高，因此有些时候，比如下雨天但空气质量优秀时，智能净化器也会启动开启，这带来了额外的资源浪费.~~\\\par
+\textbf{关键词}：PM2.5；湿度；空气质量检测；激光散射检测仪\\\par	%暂定
+\begin{comment}
+\noindent \textbf{Abstract}: aaa\par
+\noindent \textbf{Key Words}: PM2.5, Humidity, Laser Scattering Detector
+\end{comment}
+\newpage
+
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\pagestyle{plain}
+
+\section{引言}
+随着我国经济的快速发展与工业化、城镇化进程加快，空气污染成为了难以避免的严重问题.~近年来，我国空气质量改善放缓，大气污染物的排放总量常年居高.~虽然有关部门一直在采取措施控制空气污染，但以PM2.5为首的污染物的总体浓度依然居高不下，对人的身体健康产生严重的影响.~\par
+为此，许多家庭会在家配备不少的空气净化器，来减少室内的PM2.5浓度，以便获得一种健康的生活与居住环境.~近年来，随着产品的创新与升级，智能净化器开始广泛的出现并被大家所使用，它能够根据室内实际的空气质量情况选择启动与关闭，并且根据空气质量的状况和使用频率、时长，来提示更换过滤网.~这种智能净化器能够自主的进行空气净化，方便了人们的生活.~\par
+然而，现在的绝大部分的智能空气净化器配备的PM2.5检测仪都是激光散射检测仪，普通的检测仪如图~\ref{detector}~所示.~这种检测仪有一个最大的问题就是，由于水蒸气也会反射光，当空气湿度超过60\%时，会产生较大误差，读数会严重偏大.~下雨天或者在我国南方地区，由于空气湿度较大，仪器无法准确读数.~对于智能空气净化器而言，由于配备的检测仪具有这种由湿度引起的误差，会随着湿度的增大而读数偏高，因此有些时候，比如下雨天但空气质量优秀时，智能净化器也会启动开启，这带来了额外的资源浪费.~\par
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.6]{fig0.jpg}
+	\caption{普通的PM2.5激光散射检测仪}
+	\label{detector}
+\end{figure}
+因此，设计一种带湿度修正的激光散射PM2.5检测仪是必要的.~本课题就是设计、组装一种能消除因空气湿度而产生误差的测量仪.~让智能净化器真正的达到更节约能源，更绿色环保的目的.~为了实现这一课题，本文将分成以下三个部分来开展工作.~第一，本文分析了PM2.5的常用检测方法与测量设备的现状，并提出了总体的设计思路；第二，本文设计了实验建立PM2.5浓度与空气相对湿度之间的模型，得出了两者之间的数学关系；第三，本文根据湿度与PM2.5浓度的公式，设计了电子电路结构，组装一个带湿度修正的PM2.5检测仪，从而消除湿度误差影响.~
+\newpage
+
+\section{关于测量设备现状的分析}
+本章主要说明了PM2.5激光散射仪的测量原理，以及分析了它在高湿度环境下，产生读数误差的原因.~然后针对市场上的一些手持测量设备和空气净化设备的读数精度现状做了分析.~最后，本章基于对测量原理与测量设备现状的分析，提出了消除湿度误差的总体思路与方案.~
+\subsection{对PM2.5激光散射检测方法的分析}
+\subsubsection{湿度产生测量误差的原因}
+PM2.5手持检测设备最常用的检测办法是“激光散射”法，即利用一束光打在颗粒物上，反射光和颗粒物大小呈一定关系.~基于这一原理，手持式设备由一束光打在一团气上，产生的反射光强度，反算颗粒物的多少，这里要注意，激光传感器的仪器都是检测颗粒物的数量而不是质量，这与国家级的直接质量检测方法不同，颗粒数经过一些方法的换算，得出PM2.5的质量浓度.~\par
+研究表明，空气中的温度和湿度都会对激光粉尘仪检测到的颗粒物质量浓度产生一定的影响，特别是相对湿度的影响更加明显.~当空气中的相对湿度较大时，很小的湿度变化就能造成很大的误差，激光粉尘仪的读数会随相对湿度的增加而偏大（特别是相对其湿度大于60\%情况下），这是由粉尘中的吸湿性成分增长造成平均粒径的增大引起的，因此环境中的相对湿度对激光粉尘仪检测结果的影响变得不可忽略.~
+\subsubsection{关于湿度对于激光散射方法测量空气颗粒物浓度影响的研究}
+\begin{enumerate}
+	\item{\textbf{大流量空气采样——称重法}}
+	\\称重法是一种传统的测量方法.~它的工作原理为：利用空气流体力学原理，将空气中悬浮颗粒物采集到已恒重的滤膜上.~根据采样前后滤膜重量之差及空气总体积，计算出悬浮颗粒物的重量浓度.~该采样方法是一种人工采样法.~\\但该仪器维护工作量较大，费时费力，还需要交通工具协助完成，质量控制较为繁琐，容易引起人为测量误差.~因此，该方法无法适应空气质量日报的要求.~
+	\item{\textbf{$\beta$~射线衰减测试法}}
+	\\该测试办法原理为：当~$\beta$~射线通过介质时，粒子与介质中的电子互相碰撞损失能量而被吸收.~它测量的是β射线通过物质时的衰减特性.~后者与颗粒物的成分、粒径以及在滤膜上的分布状况是有一定联系的.~通过与参比滤膜的对比，计算出颗粒物浓度.~但~$\beta$~射线同样无法区分水滴与固态颗粒物，所以当湿度大于95\%以上，偏差值就会很大.~美国Metone对此做了一项改进，用加热套缠绕进样管室内部，将水蒸气蒸发，在雨天会有一定程度改善.~
+	\item{\textbf{微量振荡天平测试法}}
+	\\相较于前两种办法，微量振荡天平测试法是直接测量（非间接测量）空气中悬浮颗粒浓度的办法.~所以准确度可以高出一个数量级.~其工作原理为：基于航天技术的锥形原件振荡微量天平原理.~此锥形元件于其自然频率下振荡，振荡频率由振荡器件的物理特性、参加振荡的滤膜质量和沉积在滤膜上的颗粒物质量决定.~仪器通过采样泵和质量流量计，使环境空气以一恒定的流量通过采样滤膜，颗粒物则沉积在滤膜上.~测量出一定间隔时间前后的两个振荡频率，就能计算出在这一段时间里收集在滤膜上颗粒物的质量，再除以流过滤膜的空气的总体积，得到这段时间内空气中颗粒物的平均浓度.~
+\end{enumerate}
+\subsubsection{PM2.5手持检测设备现状}
+国家级的专业设备个人是没有能力购买的.~余下我们可以购买的设备中，技术原理都是相同的.~以下介绍本研究所使用的检测设备——\textbf{北京攀藤科技的空气锤子}.~\par
+	攀藤(Plantower)是北京一家创业公司的产品，其PM2.5传感器已经出到第三代产品，并且广泛用于国内的各个品牌PM2.5检测仪中.~官方称这是6个通道的传感器，可以测量多种直径的微颗粒数据.~当然，这个传感器也是激光散射技术的.~经过测试，空气锤子稳定后（开机1分钟）的数值与美国Dylos DC1700\footnote{Dylos是一家美国公司，致力于廉价高效的空气粒子测试仪器的研发，DC1700是Dylos的旗舰型号，可以测量两个等级，2.5微米和10微米的微粒子在单位体积空气里的数量，用以评估空气质量的优劣.~关于仪器的精度，Dylos公司跟售价高于其几十倍的专业仪器做对比，测试结果非常接近，因此这款设备的精度是可以信赖的.~}非常的接近，假设Dylos是基准的情况下，空气锤子相对准确.~
+
+\subsubsection{智能空气净化器现状}
+从京东网站上搜索智能空气净化器，并且筛选了3款比较有代表性的产品进行分析.~
+\begin{enumerate}
+	\item{\textbf{飞利浦(PHILIPS)空气净化器KJ330F-C03}}
+	\\该空气净化器，有空气质量提示，但是是使用颜色指示灯表示（共4个级别），并无确切读数.~
+	\item{\textbf{霍尼韦尔（Honeywell）智能空气净化器 KJ700F-PAC2127W}}
+	\\这款万元级别的智能空气净化器带有PM2.5显示读数.~内置双传感器，激光粉尘传感器和红外粉尘传感器.~激光粉尘传感器和红外粉尘传感器的工作原理类似，一般情况下，激光粉尘传感器的检测结果较为精准.~根据实测，该空气净化器的读数不带湿度修正值.~
+	\item{\textbf{夏普（SHARP）KI-GF70-N}}
+	\\价格5000元左右.~使用激光粉尘传感器检测PM2.5，通过颜色指示灯提示（一共3个级别），没有确切读数.~
+\end{enumerate}
+~ \par
+综上，市场上的智能空气净化器，智能主要体现在远程遥控，滤网更换提示等方面，并且根据空气质量的进行自启动的功能.~关于空气质量自动启动功能，一部分商家（包括大牌）并不提供读数显示，仅仅是说明有这个功能.~另外提供读数显示的商家，分为两种.~一种不直接在机器上显示空气质量读数，而在手机APP应用上显示，但是显示的是室外空气读数.~少数还是显示在净化器上的，但没有做湿度修正.~
+
+\subsection{方案设计}
+总结上述的对激光散射法检测PM2.5浓度的原理分析得知，由于激光散射法检测的方法无法规避水蒸气的影响，因此我们无法直接从检测层面消除湿度误差，而是只能通过间接的建模与计算，推导数学公式消除湿度误差.~\par
+总结上述的相关检测设备的现状得知，目前市面普遍适用的智能空气净化器没有对PM2.5浓度数值做湿度修正，空气湿度引起的读数误差明显存在.~因此本课题的设计内容具有创新性，也具备一定的市场应用性.~\par
+因此，对于上述问题， 本文设计制定了以下改进方案，改进方案的总体流程图如图~\ref{procedure}~ 所示.~
+
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.9]{fig1.jpg}
+	\caption{改进方案流程图}
+	\label{procedure}
+\end{figure}
+
+\newpage
+\section{相对湿度对室内PM2.5读数实时测量值的影响}
+\subsection{实验原理}
+先控制住浓度、温度、湿度三个主要变量，然后测量空气颗粒物浓度.~如果有必要，利用空气净化器来降低浓度，利用线香来增加浓度.~当浓度恒定时，不断提升环境湿度，采集不同湿度下的浓度读数.~实验环境为平常起居室，房间大小为15~$\mathrm{m^{2}}$，具体布局见下图：
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.8]{fig2.jpg}
+	\caption{实验环境示意图}
+\end{figure}
+\subsection{实验过程}
+\subsubsection{实验仪器与装置}
+\begin{enumerate}
+	\item{\textbf{PM2.5传感器检测仪}}
+	\\生产厂家：北京攀藤科技
+	\\用于测试室内空气PM2.5的浓度读数.~
+	\\仪器测量范围： $0.01-100 mg/m^{3}$
+	\\重复性误差：$\pm2\%$；测量精度： $\pm10\%$.~
+	\\精度校对说明：该产品在一定期限内使用不会出现较大精度误差.~校对需返还厂家或者直接报废.~
+
+	
+	\item{\textbf{温湿度记录仪}}
+	\\生产厂家：深圳华汉维科技
+	\\用于测试室内空气相对湿度.~该产品可以连续记录湿度数据并保存.~
+	\\相对湿度传感器精度（$26~^{\circ}\mathrm{C}$）：
+	\\$\pm2\%RH$（$0-90\%$相对湿度）；$\pm3\%RH$（$90-100\%$相对湿度）.~
+	\\精度校对说明：该产品在一定期限内使用不会出现较大精度误差.~校对需返还厂家或者直接报废.~
+	
+	\item{\textbf{空气加湿器}}
+	\\用于增加室内空气相对湿度.~
+	
+	\item{\textbf{抽湿机}}
+	\\生产厂家：夏普
+	\\用于减少室内空气相对湿度.~
+	
+	\item{\textbf{空调}}
+	\\生产厂家：海信
+	\\用于控制室内温度.~
+	
+	\item{\textbf{空气净化器}}
+	\\型号：小米空气净化器MAX
+	\\用于降低空气中PM2.5浓度.~
+	
+	\item{\textbf{线香}}
+	\\用于增加室内空气PM2.5浓度.~
+\end{enumerate}
+
+\subsubsection{实验流程}
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.7]{fig3.jpg}
+	\caption{实验流程图}
+\end{figure}
+\begin{enumerate}
+	\item{\textbf{紧闭窗门}}
+	\\关紧门和窗户，使用封条堵住缝隙.~
+	
+	\item{\textbf{将空调打开调至室温$26~^{\circ}\mathrm{C}$}}
+	\\测试环境需要保证温度恒定，因为不同温度对于湿度测量是有影响的，为了保证实验数据的准确性，将温度的控制为恒定数值.~
+	
+	\item{\textbf{调整测量标准值}}
+	\\根据之前的研究结论，假定在温度为$26~^{\circ}\mathrm{C}$，湿度为50\%时，PM2.5检测仪读数误差可以忽略不计.~\par
+将抽湿机打开，配合空调，迅速将湿度调整至50\%.~并且同时开启空气净化器，将PM2.5数值控制到读数50.~在温度为$26~^{\circ}\mathrm{C}$和湿度为50\%的情况下，为了减少空调、加湿器和线香分布不均和延时性造成的影响，在距离所有环境影响仪器之外3米进行测量读数.~如果此时颗粒物没有达到预期值，轮番使用线香和净化器调整.~
+	
+	\item{\textbf{从湿度为60\%开始测量}}
+	\\步骤2完成后，打开加湿器，并将湿度调整为60\%后关掉.~测量空气中PM2.5的浓度，并记录3次数据.~
+	
+	\item{\textbf{不断提升湿度，测量颗粒物浓度}}
+	不断重复步骤3，湿度每5\%作为一个测量点，记录实验数据.~每个湿度下测试3次，直至湿度达到90\%.~
+	
+	\item{\textbf{调整浓度重新记录}}
+	将门窗打开通风10分钟，重置测量标准.~温度为$26~^{\circ}\mathrm{C}$，湿度为60\%，浓度为75.~重复步骤1至步骤5.~直至湿度达到90\%.~
+	
+	\item{\textbf{记录不同浓度，不同湿度下的实验数据}}
+	重复步骤1到步骤6，浓度每25作为一档，直到300.~
+\end{enumerate}
+\subsubsection{实验数据记录}
+见附录A
+
+\subsection{数学模型分析}
+\subsubsection{实验原理}
+在实验过程中，我们发现PM2.5的浓度不同，湿度与PM2.5之间关系也会发生变化.~因此我们需要在不同的PM2.5浓度下，分别考察两者的关系.~基于本研究考察湿度对PM2.5的影响，我们将湿度作为自变量，PM2.5作为因变量，运用回归分析的方法考察湿度对PM2.5的影响.~在数学模型建立过程中，我们基于最小二乘法用	Stata软件对参数进行估计.~
+\subsubsection{实验过程}
+考虑到硬件上的运行效率等因素，我们先对数据进行线性拟合并加以评估.~在之后的公式中，我们用ω代表湿度（单位~$\%RH$），用PM2.5来表示它的浓度（单位~$\mathrm{\mu g/m^3}$）.~\par
+以下，我们依次取PM2.5得浓度从50-300~$\mathrm{\mu g/m^3}$时的实验数据，来对湿度与PM2.5浓度建模，获取两者之间的数学关系.~
+
+\noindent \textbf{PM2.5浓度为50时，湿度和PM2.5的关系：}
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.45]{math1.jpg}
+	\caption{浓度为50~$\mathrm{\mu g/m^3}$时的建模过程}
+	\label{model}
+\end{figure}
+\\建模的过程如图~\ref{model}~所示，从上述模型，我们可以得到回归方程：\\
+\begin{displaymath}
+PM2.5=37.09524+0.2~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.8954$，校正拟合优度Adj~$R^{2}=0.8745$，模型成立.~\\~\\
+同理可得，\\
+\noindent \textbf{PM2.5浓度为75时，湿度和PM2.5的关系：}
+%\begin{figure}[!hbp]
+%	\centering
+%	\includegraphics[scale=0.45]{math2.jpg}
+%\end{figure}
+%\\从上述模型，我们可以得到回归方程：
+\begin{displaymath}
+PM2.5=61.84524 + 0.2071429~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.9244$，校正拟合优度Adj~$R^{2}=0.9153$，模型成立.~
+
+\noindent \textbf{PM2.5浓度为100时，湿度和PM2.5的关系：}
+%\begin{figure}[!hbp]
+%	\centering
+%	\includegraphics[scale=0.45]{math3.jpg}
+%\end{figure}
+%\\从上述模型，我们可以得到回归方程：
+\begin{displaymath}
+PM2.5=66.77381+0.5166666~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.9211$，校正拟合优度Adj~$R^{2}=0.9054$，模型成立.~
+
+\noindent \textbf{PM2.5浓度为125时，湿度和PM2.5的关系：}
+%\begin{figure}[!hbp]
+%	\centering
+%	\includegraphics[scale=0.42]{math4.jpg}
+%\end{figure}
+%\\从上述模型，我们可以得到回归方程：
+\begin{displaymath}
+PM2.5=77.61903+0.7238098~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.7523$，校正拟合优度Adj~$R^{2}=0.7027$，模型成立.~
+
+\noindent \textbf{PM2.5浓度为150时，湿度和PM2.5的关系：}
+%\begin{figure}[!hbp]
+%	\centering
+%	\includegraphics[scale=0.43]{math5.jpg}
+%\end{figure}
+%\\从上述模型，我们可以得到回归方程：
+\begin{displaymath}
+PM2.5=115.9286+0.5380952~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.9081$，校正拟合优度Adj~$R^{2}=0.8897$，模型成立.~
+
+\noindent \textbf{PM2.5浓度为175时，湿度和PM2.5的关系：}
+%\begin{figure}[!hbp]
+%	\centering
+%	\includegraphics[scale=0.42]{math6.jpg}
+%\end{figure}
+%\\从上述模型，我们可以得到回归方程：
+\begin{displaymath}
+PM2.5=123.8929+0.7880953~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.8048$，校正拟合优度Adj~$R^{2}=0.7657$，模型成立.~
+
+\noindent \textbf{PM2.5浓度为200时，湿度和PM2.5的关系：}
+%\begin{figure}[!hbp]
+%	\centering
+%	\includegraphics[scale=0.4]{math7.jpg}
+%\end{figure}
+%\\从上述模型，我们可以得到回归方程：
+\begin{displaymath}
+PM2.5=142.5476+0.8904763~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.7731$，校正拟合优度Adj~$R^{2}=0.7277$，模型成立.~
+
+\noindent \textbf{PM2.5浓度为225时，湿度和PM2.5的关系：}
+%\begin{figure}[!hbp]
+%	\centering
+%	\includegraphics[scale=0.39]{math8.jpg}
+%\end{figure}
+%\\从上述模型，我们可以得到回归方程：
+\begin{displaymath}
+PM2.5=140.5833+1.297619~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.7605$，校正拟合优度Adj~$R^{2}=0.7126$，模型成立.~
+
+\newpage
+\noindent \textbf{PM2.5浓度为250时，湿度和PM2.5的关系：}
+%\begin{figure}[!hbp]
+%	\centering
+%	\includegraphics[scale=0.43]{math9.jpg}
+%\end{figure}
+%\\从上述模型，我们可以得到回归方程：
+\begin{displaymath}
+PM2.5=140.9167+1.678571~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.7962$，校正拟合优度Adj~$R^{2}=0.7555$，模型成立.~
+
+\noindent \textbf{PM2.5浓度为275时，湿度和PM2.5的关系：}
+%\begin{figure}[!hbp]
+%	\centering
+%	\includegraphics[scale=0.39]{math10.jpg}
+%\end{figure}
+%\\从上述模型，我们可以得到回归方程：
+\begin{displaymath}
+PM2.5=151.4881+1.888095~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.7447$，校正拟合优度Adj~$R^{2}=0.6937$，模型成立.~
+
+\noindent \textbf{PM2.5浓度为300时，湿度和PM2.5的关系：}
+%\begin{figure}[!hbp]
+%	\centering
+%	\includegraphics[scale=0.38]{math11.jpg}
+%\end{figure}
+%\\从上述模型，我们可以得到回归方程：
+\begin{displaymath}
+PM2.5=146.3214+2.369048~\omega
+\end{displaymath}
+其中拟合优度~$R^{2}=0.7914$，校正拟合优度Adj~$R^{2}=0.7496$，模型成立.~
+
+\newpage
+\section{电子电路设计}
+本章主要介绍了笔者组装的测量仪的电子设计部分，主要包括了以下三方面的内容：
+\begin{enumerate}
+\item 使用传感器读取原始数据信号；
+\item 将原始数据信号转换为数字信号；
+\item LED显示温度、湿度、PM2.5浓度数值.~
+\end{enumerate}\par
+通过这三方面的电子设计，本章能够实现对温度、湿度、PM2.5浓度三个数据的采集、采样与显示，是制作这种能消除因空气温湿度而产生测量误差的PM2.5测量仪的重要组成部分.~
+\subsection{总体流程}
+通过传感器与电子电路的设计，本章能够采集、采样、显示温湿度与PM2.5浓度数据，这三个步骤共同构成了本章的总体流程，示意图如图~\ref{elecdesign}~所示.~
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.5]{elec0.png}
+	\caption{电子电路设计总流程图}
+	\label{elecdesign}
+\end{figure}
+\subsection{数据采集}
+为了设计、组装一个能消除因空气温湿度而产生测量误差的PM2.5测量仪，必不可少的数据有三个，分别是温度、湿度以及PM2.5浓度.~为了实时测量所在环境的三个数据数值，测量仪需要实时采集相关的数据信息.~因此，测量仪需要配备相关的传感器，即温度传感器、湿度传感器、PM2.5浓度传感器，从而在每时每刻都能够得到三个重要数据的数值.~
+\subsubsection{温湿度传感器}
+本文选用的温湿度传感器模块是AMT2001.~AMT2001 是湿敏电容型温湿度传感器，是温湿度一体型传感器.~传感器信号采用模拟电压的输出方式，该传感器具有精度高、可靠性高、一致性好的优点，并且已自带温度补偿功能，确保长期的稳定性，同时，它使用方便、价格低廉，适合本文用于实验目的的测量仪的组装.~温湿度传感器的实物如图~\ref{amt2001}~所示.~
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.75]{elec1.jpg}
+	\caption{AMT2001传感器实物图}
+	\label{amt2001}
+\end{figure}
+\newpage
+AMT2001传感器含有四个引脚，四个引脚的分配与功能描述如图~\ref{pin1}~所示.~可以看到，引脚2与引脚4分别输出了湿度与温度的电压值.~\par
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.60]{elec2.jpg}
+	\caption{引脚分配与功能描述}
+	\label{pin1}
+\end{figure}
+后续过程中，我们还需要使用传感器模块给出的相应转换公式，将代表温湿度的电压值转换为实际的温度值与湿度值.~
+\begin{enumerate}
+\item 温度的换算公式如下：
+	\begin{displaymath}
+	Temparature(^{\circ}\mathrm{C})=Tout(V)/0.01
+	\end{displaymath}
+	电压输出与温度的线性曲线如图~\ref{V-T}~所示，传感器温度测量范围为0-80$~^{\circ}\mathrm{C}$，线性刻度系数为$+10.0~mv/^{\circ}\mathrm{C}$，0$~^{\circ}\mathrm{C}$时输出 0.0V.~
+	\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.50]{elec3.jpg}
+	\caption{电压输出与温度的线性曲线}
+	\label{V-T}
+	\end{figure}
+
+\item 湿度的换算公式如下：
+	\begin{displaymath}
+	Humidity(\%RH)=Hout(V)/0.03
+	\end{displaymath}
+	电压输出与湿度的线性曲线如图~\ref{V-H}~所示，传感器湿度测量范围为~0-100\%RH，电压输出为~0.0-3.0V.~
+	\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.50]{elec4.jpg}
+	\caption{电压输出与湿度的线性曲线}
+	\label{V-H}
+	\end{figure}
+\end{enumerate}
+\subsubsection{PM2.5浓度传感器}
+本文选用的PM2.5浓度传感器为GP2Y1014AU.~GP2Y1014AU是一款光学灰尘传感器，能够有效地检测PM2.5的浓度.~传感器中心有个洞可以让空气自由流过，它通过定向发射LED光，检测经过空气中PM2.5折射过后的光线来判断PM2.5的含量浓度.~PM2.5 浓度传感器的实物如图~\ref{gp2y}~所示.~\par
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.50]{elec5.jpg}
+	\caption{GP2Y1014AU产品实物图}
+	\label{gp2y}
+\end{figure}
+GP2Y1014AU传感器模块含有6个引脚，它的内部结构图以及引脚的分配与功能如图~\ref{pin2}~所示.~可以看到，引脚3是LED的驱动脉冲，需要外界输入固定周期的脉冲信号；引脚5则是输出的代表PM2.5浓度的电压值.~\par
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.55]{elec6.jpg}
+	\caption{产品结构图以及引脚描述}
+	\label{pin2}
+\end{figure}
+在得到代表PM2.5浓度的电压值后，我们还需要使用传感器模块给出的相应转换公式，将代表浓度的电压值转换为实际的PM2.5含量.~转换公式如下：
+\begin{displaymath}
+OV(V)=Concentration(mg/m^{3})\div10\times K(V/(0.1 mg/m^{3})+NOV(V)
+\end{displaymath}
+其中OV为输出电压，K为检出感度默认为0.5，NOV为无尘输出电压默认0.9.~\par
+电压输出与PM2.5浓度的关系如图~\ref{V-pm}~所示.~
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.55]{elec7.jpg}
+	\caption{电压输出与PM2.5浓度的关系}
+	\label{V-pm}
+\end{figure}
+\subsection{数据采样与量化}
+从传感器中采集出来的数据都是连续的电压值，这样的电压值是随时间而连续变化的，然而，在实际对数据的处理过程中，我们用到的都是数字信号.~因此，我们需要对数据的形式进行转换，将模拟信号转换为数字信号，从而便于对传感器数据的处理、计算与显示.~这种转换被称为模数转换，亦即A/D转换.~\par
+A/D转换有四个步骤，分别是采样、保持、量化和编码.~采样能够把时间连续变化的信号变换为时间离散的信号；保持能够保持采样信号，使之有充分时间转换为数字信号；量化则是把采样保持电路的输出信号用单位量化电压的整数倍表示；编码最后将量化的结果用二进制代码表示.~\par
+经过这四个步骤，一个连续的模拟信号就被转换为了数字信号，从而便于进一步处理.~A/D转换的一般步骤如图~\ref{ad}~所示.~\par
+本文选用STM32F103的单片机开发板作为整个测量仪的核心板，在该开发板上进行A/D转换、数据运算以及显示的操作.~由于STM32F103开发板功能强大，支持AD转化，因此我们不需要额外够慢AD转换模块，可以直接使用开发板的相应接口进行A/D转换.~
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.60]{elec8.jpg}
+	\caption{A/D转换的一般步骤}
+	\label{ad}
+\end{figure}
+
+\subsection{数据的显示}
+本文选用的核心板STM32F103可以外接LCD显示器，通过这个显示器，我们可以方便地将温度、湿度以及PM2.5浓度三个参数显示出来.~\par
+LCD即液晶显示器，液晶棒状分子在外加电场的作用下排列状态发生变化，使得通过液晶显示器件的光被调制，从而在显示屏上呈现出不同颜色.~每个显示象素都可以单独被电场控制.~它适用于低压、微功耗电路.~\par
+\newpage
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.35]{elec9.jpg}
+	\caption{LCD显示器显示效果图}
+\end{figure}
+
+\subsection{电路设计}
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=0.13]{elec10.jpg}
+	\caption{电路设计图}
+	\label{elec10}
+\end{figure}
+如图~\ref{elec10} 所示，整个电路部分的电源电压VCC为5.0V，为使各模块的零电位相同，各模块都接在同一个地GND上.~\par
+左上方的部分为GP2Y1010AU模块，即PM2.5浓度传感器模块.~管脚6接VCC，管脚1接150$\mathrm{\Omega}$电阻与VCC相连.~管脚2、管脚4共同接地.~管脚3接在STM32F103开发板的P8.0的IO口，开发板使用定时器中断，通过管脚3为GP2Y1010AU模块提供固定频率的脉冲信号.~管脚5接在STM32-F103 开发板的P8.1的IO口，输出代表PM2.5浓度的电压值.~\par
+左下方的部分为ATM2001模块，即温湿度传感器模块.~管脚1接VCC，管脚3接地.~管脚2、管脚4分别接在STM32F103开发板的P8.2、P8.3的IO口，输出分别代表湿度与温度的电压值.~\par
+中间的部分代表STM32F103开发板的芯片，外接电源为5V，与其他模块共地.~能够通过管脚P8.0为GP2Y1010AU模块提供脉冲信号.~能够将管脚P8.1、P8.2、P8.3接收到的代表参数信息的模拟电压值通过内部自带的A/D模块转换成数字信号.~\par
+右边的部分代表STM32F103配套携带的ALIENTEK TFTLCD模块，即LCD显示屏模块.~外接电源为5V，与其他模块共地.~通过管脚D0-D7的数据线，STM32F103开发板将需要显示的信息传递给LCD显示屏，从而在显示屏上显示各种参数信息.~\par
+
+\subsection{小结}
+本章阐述了组装的能消除因空气温湿度而产生测量误差的PM2.5测量仪的电子电路部分.~本章主要通过对温度、湿度、PM2.5浓度三种关键数据的采集、采样与显示，直观的输出了当前环境下的三项指标的数值.~接下来我们便可以使用第3章中获得的倒推修正函数来计算排除湿度干扰项后的真正的PM2.5浓度值，实现测量仪的设计要求.~
+
+\newpage
+\section{总结与展望}
+为了消除空气温湿度对PM2.5浓度检测的影响，本课题设计了一种能消除因空气温湿度而产生测量误差的PM2.5测量仪，从而更加精确地检测PM2.5的浓度，提供更加准确的空气质量信息，最终实现让智能净化器真正的达到更节约资源、更绿色环保的目的.~
+\subsection{总结}
+为设计这种消除温湿度误差的PM2.5测量仪，本文从三个方面入手.~\par
+第一，本文分析解读了PM2.5测量的相关原理和温湿度变化产生测量误差的原因，同时分析了市场上现有的PM2.5测量设备的现状，得出了市面广泛售卖的相关产品目前还没有进行温湿度修正，消除温湿度误差.~\par
+第二，本文设计了解决温湿度误差问题的总体方案，首先，本文使用市面上的比较成熟的PM2.5检测仪进行样本采集，采集到了不同温湿度情况下，PM2.5的实测值，然后，本文使用MATLAB软件拟合倒推修正函数，在理论上消除温湿度误差.~\par
+第三，本文设计了自行组装的带温湿度修正的PM2.5测量仪的电子电路，利用PM2.5浓度传感器以及温湿度传感器采集相关数据，然后进行A/D转换，将模拟电压信号转换为能够方便处理的数字信号，最后经过修正函数计算后，将当前环境实际温湿度、PM2.5浓度信息显示在LED上.~
+\subsection{展望}
+本课题还有进一步提升或改进的空间，测量仪的电子电路部分目前都是采用有线连接的方式，测量部分和显示部分都通过电子线路连接在一起，这显得设备比较笨重，并且不便于随地测量.~如果能够通过通信的方式，将测量部分和显示部分分开，使用无线通信传递测量数据，这将大大方便测量仪的检测与结果的可视化，更利于人们的使用.~
+
+\newpage
+\section{附录}
+\subsection*{附录A 实验数据}
+室内温度：$26~^{\circ}\mathrm{C}$
+\begin{figure}[!hbp]
+	\centering
+	\includegraphics[scale=1.0]{fig4.jpg}
+\end{figure}
+
+\newpage
+\newgeometry{left = 1.5 cm, right = 1.5 cm}
+\subsection*{附录B 检测仪源码}
+\begin{scriptsize}
+\begin{verbatim}
+#include "sys.h"
+#include "delay.h"
+#include "usart.h"
+#include "LCD1602.h"
+#include "key.h"
+#include "i2c.h"
+#include "SHT2X.h"
+#include "bmp.h"
+#include <math.h> 
+
+#define RATIO 800		       //ratio 800-1000recommended
+u16 PM25_Value = 0;     		//PM = ((pmBuf[1]<<8)+pmBuf[2])/1024*8*ratio
+u16 PM25_Value_max = 200;
+u8 pmBuf[7];
+
+u8 setn = 0,mode = 0;
+
+void Get_PM(void)
+{
+    char i = 0;
+    char j = 0;
+
+    RX_Cnt = 0;
+    if(B_RX_OK == 1)
+    {
+        for(i = 0; i<8; i++)
+        {
+            if((RX_Buffer[i] == 0xAA)&&(RX_Buffer[i+6]==0xFF))
+            {
+                goto find2;
+            }
+        }
+        goto end2;
+find2:
+        for(j = 0; j<7; j++)
+        {
+            pmBuf[j] = RX_Buffer[i+j];
+        }
+
+        PM25_Value = (unsigned int)((pmBuf[1]*256)+pmBuf[2])*5/2048.0*RATIO;
+        B_RX_OK = 0;
+    }
+end2:
+    return;
+}
+
+void keyscan()
+{
+    static u8 key_val = 0;
+    key_val = KEY_Scan(0);
+    if(key_val == 1)
+    { 
+        mode = !mode;
+        if(mode == 0)
+        {       
+            USART_Cmd(USART1, DISABLE);                      
+            LCD_Write_String(0,0,"Tmp:  C  Hum:  %");
+            LCD_Write_String(0,1,"P:     Kpa G:  %");
+        }
+        else
+        {
+            USART_Cmd(USART1, ENABLE); 
+            LCD_Write_String(0,0,"PM2.5:    ug/m3 ");
+            LCD_Write_String(0,1,"max_P:    ug/m3 ");
+            LCD_Write_Char(7,1,PM25_Value_max/100+'0');
+            LCD_Write_Char(8,1,PM25_Value_max%100/10+'0');
+            LCD_Write_Char(9,1,PM25_Value_max%10+'0');
+        }
+    }
+    if(key_val == 2)
+    { 
+        if(mode == 1)
+        {
+            if(PM25_Value_max < 999)
+            {
+                PM25_Value_max += 10;
+            }
+            LCD_Write_Char(7,1,PM25_Value_max/100+'0');
+            LCD_Write_Char(8,1,PM25_Value_max%100/10+'0');
+            LCD_Write_Char(9,1,PM25_Value_max%10+'0');
+        }
+    }
+    if(key_val == 3)
+    { 
+        if(mode == 1)
+        {
+            if(PM25_Value_max > 1)
+            {
+                PM25_Value_max -= 10;
+            }
+            LCD_Write_Char(7,1,PM25_Value_max/100+'0');
+            LCD_Write_Char(8,1,PM25_Value_max%100/10+'0');
+            LCD_Write_Char(9,1,PM25_Value_max%10+'0');
+        }
+    }		
+}
+
+extern  float temperatureC;
+extern float humidityRH;
+
+int main(void)
+{		
+    u8 count = 0,cnt = 0,flag = 0;
+    u16 beep_count = 0;
+    long True_Press;
+    short  temperature;
+    short  humidity;
+    short  pro = 0;
+	
+    delay_init();	    	 //initial of delay function	  
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //config NVIC group2:2 priority
+    delay_ms(500);
+    LCD_Init();
+    KEY_Init();
+    I2C_Configuration();
+    SHT2X_Init();
+    delay_ms(1000);
+    IIC_Init();
+    uart_init(2400);                   //enable COM1
+    if(mode == 0)
+    {
+        count = 90;
+        LCD_Write_String(0,0,"Tmp:  C  Hum:  %");
+        LCD_Write_String(0,1,"P:     Kpa G:  %");
+    }
+    else
+    {
+        LCD_Write_String(0,0,"PM2.5:    ug/m3 ");
+        LCD_Write_String(0,1,"max_P:    ug/m3 ");
+    }
+    
+    while(1)
+    {
+        keyscan();
+        if(count++ >= 150)
+        {
+            count = 0;
+            if(mode == 0)
+            {
+                BEEP = 0;
+                if(SHT2x_Calc_T())
+                {
+                    temperature = (short)temperatureC;
+                }
+                if(SHT2x_Calc_RH())
+                {
+                    humidity = (short)humidityRH;
+                }
+                LCD_Write_Char(4,0,temperature/10+'0');
+                LCD_Write_Char(5,0,temperature%10+'0');
+                LCD_Write_Char(13,0,humidity/10+'0');
+                LCD_Write_Char(14,0,humidity%10+'0');
+								
+                if(humidity < 60)
+                    pro = 10;
+                else if(humidity >= 60 && humidity < 80)
+                    pro = 20;
+                else if(humidity >= 80 && humidity < 95)
+                    pro = 50;
+                else if(humidity >= 95)
+                    pro = 99;
+                LCD_Write_Char(13,1,pro/10+'0');
+                LCD_Write_Char(14,1,pro%10+'0');
+								
+                True_Press = Convert_UncompensatedToTrue((long)BMP085_Get_UT(),(long)BMP_UP_Read());
+
+                LCD_Write_Char(2,1,True_Press/10000000+'0');
+                LCD_Write_Char(3,1,True_Press%10000000/1000000+'0');
+                LCD_Write_Char(4,1,True_Press%1000000/100000+'0');
+                LCD_Write_Char(5,1,'.');
+                LCD_Write_Char(6,1,True_Press%100000/10000+'0');
+            }
+            else if(mode == 1)
+            {
+                if(cnt++ > 200)
+                {
+                    cnt = 0;
+                    Get_PM();
+                    if (PM25_Value < 75 && PM25_Value >= 50)
+                        PM25_Value = short(-158.2386 + 4.477158*humidity);
+                    else if (PM25_Value >= 75 && PM25_Value < 100)
+                        PM25_Value = short(-272.188 + 4.486738*humidity);
+                    else if (PM25_Value >= 100 && PM25_Value < 125)
+                        PM25_Value = short(-113.1346 + 1.782864*humidity);
+                    else if (PM25_Value >= 125 && PM25_Value < 150)
+                        PM25_Value = short(-62.09298 + 1.039333*humidity);
+                    else if(PM25_Value>=150&&PM25_Value<175)
+                        PM25_Value = short(-62.09298 + 1.039333*humidity);
+                    else if (PM25_Value >= 175 && PM25_Value<200)
+                        PM25_Value = short(-111.8768 + 1.021185*humidity);
+                    else if (PM25_Value >= 200 && PM25_Value<225)
+                        PM25_Value = short(-106.7332 + 0.8681521*humidity);
+                    else if (PM25_Value >= 225 && PM25_Value<250)
+                         PM25_Value = short(-64.42301 + 0.5860455*humidity);
+                    else if (PM25_Value >= 250 && PM25_Value<275)
+                        PM25_Value = short(-51.56085 + 0.4743491*humidity);
+                    else if (PM25_Value >= 275 && PM25_Value<300)
+                        PM25_Value = short(-40.60561 + 0.3944302*humidity);
+                    else if (PM25_Value >= 300)
+                        PM25_Value = short(-33.2296 + 0.334042*humidity);
+
+                    if(PM25_Value > 999)
+                    {
+                        LCD_Write_Char(7,0,'-');
+                        LCD_Write_Char(8,0,'-');
+                        LCD_Write_Char(9,0,'-');
+                    }
+                    else
+                    {
+                        LCD_Write_Char(7,0,PM25_Value%1000/100+'0');
+                        LCD_Write_Char(8,0,PM25_Value%100/10+'0');
+                        LCD_Write_Char(9,0,PM25_Value%10+'0');
+                    }
+								
+                    if(PM25_Value >= PM25_Value_max && flag == 0)
+                    {
+                        flag = 1;
+                        if(beep_count++ < 2)
+                        {
+                            BEEP = 1;
+                        }
+                        else
+                        {
+                            BEEP = 0;
+                            if(beep_count > 10)
+                            {
+                                beep_count = 0;
+                            }
+                        }
+                        flag = 0;
+                    }
+                    else
+                    {
+                        BEEP = 0;
+                    }
+                }
+            }
+        }
+    }
+}    
+\end{verbatim}
+\end{scriptsize}
+\restoregeometry
+
+
+
+\newpage
+\setcounter{page}{1}
+\pagenumbering{roman}
+\begin{thebibliography}{99}
+	\bibitem{pa} 王红萍.~ 铂电阻温度传感器测温研究[J].~~\emph{抚顺石油学院学报}, 2003(02):58--60
+    \bibitem{pb}张媛媛,何怡刚,徐雪松.~ 基于$C8051F020$的温湿度控制箱设计[J]~\emph{国外电子元器件}, 2004,(10).~
+    \bibitem{pc}于洋.~ 高低温试验箱微机自动控制系统的设计[J]~\emph{工业仪表与自动化装置}, 2003,(02).~
+    \bibitem{pd}陈儿同,王芳,贺运红,叶继涛,华泽钊.~ 多功能低温试验台的研制与实验方法[J]~\emph{上海理工大学学报}, 2002,(03).~
+    \bibitem{pe}Xiaoxin, Fu, Xinming, Wang, Qihou, Hu. Changes in visibility with PM2.5 composition and relative humidity at a background site in the Pearl River Delta region[J]. Guangzhou, China: \emph{Journal of Environmental Sciences}, 2015.
+    \bibitem{pf}徐春雨, 王秦, 李娜, 林夏, 徐东群. 大气PM2.5浓度的光散射测定法及湿度校正[J]. \emph{环境与健康杂志}, 2015, 32(2): 151-154
+    \bibitem{pg}HJ 618-2011, 中华人民共和国国家环境保护标准[S].
+    \bibitem{ph}黄婧, 邓芙蓉, 吴少伟, 郭新彪. 相对湿度对光散射法测定大气细颗粒物浓度的影响[J]. \emph{中国预防医学杂志}, 2012, 13(5): 321-324
+    \bibitem{pi} 况彩菱, 尚闽, 崔海瑞, 肖大乔, 郑祥, 程荣. 相对湿度对室内PM2.5浓度实时测量值的影响[J]. \emph{环境科学与技术}, 2017, 40(1): 107-111
+\end{thebibliography}
+\end{document}
